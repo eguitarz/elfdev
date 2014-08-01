@@ -65,3 +65,6 @@ end
 group :development do
   gem 'better_errors'
 end
+
+gem 'haml-rails'
+gem 'compass-rails'
