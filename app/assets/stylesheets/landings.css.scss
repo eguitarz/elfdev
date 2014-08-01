@@ -1,0 +1,88 @@
+@import "compass/css3";
+@import "modules";
+$ring-1-color: #00b8b6;
+$ring-2-color: #00b8b6;
+
+@include keyframe(rotate) {
+	0% {
+		@include rotate(0deg);
+	}
+
+	100% {
+		@include rotate(360deg);
+	}
+}
+
+@include keyframe(inverse-rotate) {
+	0% {
+		@include rotate(0deg);
+	}
+
+	100% {
+		@include rotate(-360deg);
+	}	
+}
+
+
+#rings {
+	position: absolute;
+	margin-left: calc(50% - 300px);
+	width: 600px;
+	height: 600px;
+	overflow: hidden;
+}
+
+#rings .ring-1 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: calc(50% - 50px);
+	left: calc(50% - 50px);	
+	border: 1px solid $ring-1-color;
+	border-radius: 100%;
+	@include box-shadow(0 0 100px $ring-1-color);
+}
+
+#rings .ring-2 {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	top: calc(50% - 150px);
+	left: calc(50% - 150px);	
+	border: 2px dashed $ring-2-color;
+	border-radius: 100%;
+	@include infinite-animation(0, 150s, linear, inverse-rotate);
+}
+
+#rings .ring-3 {
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	top: calc(50% - 200px);
+	left: calc(50% - 200px);	
+	border: 2px solid $ring-2-color;
+	border-radius: 100%;
+}
+
+#rings .ring-group .ring-4 {
+	width: 800px;
+	height: 800px;
+	position: absolute;
+	top: calc(50% - 400px);
+	left: calc(50% - 400px);
+	background: image-url("ruler-ring.png");
+	background-size: 800px 800px;
+	background-position:-1px -1px;
+	@include infinite-animation(0, 240s, linear, rotate);
+}
+
+#rings .ring-group .glow {
+	width: 474px;
+	height: 474px;
+	position: absolute;
+	top: calc(50% - 238px);
+	left: calc(50% - 238px);	
+	border: 0 solid $ring-1-color;
+	border-radius: 100%;
+	@include box-shadow(inset 0 0 25px $ring-1-color);
+}
