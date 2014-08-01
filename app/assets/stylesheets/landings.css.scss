@@ -278,11 +278,27 @@ $ring-2-color: #fff;
 	margin-left: 3.5em;
 }
 
+@include keyframe(flash) {
+	0% {opacity:0.45}
+	30% {opacity:0.9}
+	100% {opacity:0.21}
+}
+
 #logo {
 	margin-top: 5em;
 	margin-left: 1em;
 	font-size: 2em;
 	color: $text-color-3;
+	span {
+		opacity: 0.45;
+	}
+	$animation-duration: 4.5s;
+	.e { @include infinite-animation(0, $animation-duration, ease, flash); }
+	.l { @include infinite-animation(100ms, $animation-duration, ease, flash); }
+	.f { @include infinite-animation(200ms, $animation-duration, ease, flash); }
+	.d { @include infinite-animation(300ms, $animation-duration, ease, flash); }
+	.e2 { @include infinite-animation(400ms, $animation-duration, ease, flash); }
+	.v { @include infinite-animation(500ms, $animation-duration, ease, flash); }
 }
 
 #clock {
