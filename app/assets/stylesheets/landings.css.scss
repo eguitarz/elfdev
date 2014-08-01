@@ -24,6 +24,10 @@ $ring-2-color: #fff;
 	}	
 }
 
+.display {
+	opacity: 1 !important;
+}
+
 #menu-container {
 	position: relative;
 	width: 980px;
@@ -45,16 +49,78 @@ $ring-2-color: #fff;
 	position: absolute;
 	top: calc(50% - 50px);
 	left: calc(50% - 50px);	
-	border: 1px solid $ring-1-color;
+	border: 2px solid $ring-1-color;
 	border-radius: 100%;
 	background-color: transparentize($ring-1-color, 0.3);
 	@include box-shadow(0 0 100px $ring-1-color);
+	z-index: 1;
 
 	.date {
+		pointer-events: none;
+		font-size: 1.5em;
+		color: orange;
+		text-align: center;
+		line-height: 25px;
+		margin-top: 20px;
+		.day {
+			display: block;
+			color: $text-color-2;
+			line-height: 30px;
+			font-size: 1.4em;
+		}
+	}
+}
+
+.spoke {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	display: inline-block;
+	width: 5px;
+	height: 100px;
+	padding-top: 50px;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 2;
+	@include transition-property(all);
+	@include transform-origin(top center 0);
+	@include transition-duration(300ms);
+}
+
+.displayer {
+	position: absolute;
+	font-size: 0.8em;
+	width: 60px;
+	height: 60px;
+	margin-top: 5px;
+	left: -30px;
+	border: 2px solid $text-color-3;
+	border-radius: 100%;
+	color: $text-color-3;
+	background-color: transparentize($text-color-3, 0.7);
+	text-align: center;
+	@include transition-property(transform);
+	@include transition-duration(300ms);
+
+	.number {
+		display: block;
 		font-size: 1.5em;
 		color: $text-color-2;
+		width: 100%;
+		margin-top: 10px;
 		text-align: center;
-		line-height: 100px;
+	}
+}
+
+.ring-1 .spoke:nth-child(2) {
+	// left: -10px;
+}
+
+.ring-1 .spoke:nth-child(3).display {
+	// left: 60px;
+	@include rotate(-50deg);
+	.displayer {
+		@include rotate(50deg);
 	}
 }
 
@@ -164,9 +230,8 @@ $ring-2-color: #fff;
 	cursor: pointer;
 	&:hover {
 		background-color: transparentize($brand-primary, 0.2);
-		// outline: 1px solid $brand-primary;
-		// border-bottom: 1px solid transparent;
 		color: $text-highlight-color;
+		@include box-shadow(0 0 20px $brand-primary);
 	}
 }
 
@@ -218,6 +283,12 @@ $ring-2-color: #fff;
 	margin-left: 1em;
 	font-size: 2em;
 	color: $text-color-3;
+}
+
+#clock {
+	margin-top: 1em;
+	margin-left: 0em;
+	font-size: 1.5em;
 }
 
 @include keyframe(flipflap) {
