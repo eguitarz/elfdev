@@ -1,7 +1,8 @@
+@import "bootstrap_configuration";
 @import "compass/css3";
 @import "modules";
 $ring-1-color: #00b8b6;
-$ring-2-color: #00b8b6;
+$ring-2-color: #fff;
 
 @include keyframe(rotate) {
 	0% {
@@ -23,6 +24,12 @@ $ring-2-color: #00b8b6;
 	}	
 }
 
+#menu-container {
+	position: relative;
+	width: 980px;
+	height: 600px;
+	margin: auto;
+}
 
 #rings {
 	position: absolute;
@@ -40,7 +47,15 @@ $ring-2-color: #00b8b6;
 	left: calc(50% - 50px);	
 	border: 1px solid $ring-1-color;
 	border-radius: 100%;
+	background-color: transparentize($ring-1-color, 0.3);
 	@include box-shadow(0 0 100px $ring-1-color);
+
+	.date {
+		font-size: 1.5em;
+		color: $text-color-2;
+		text-align: center;
+		line-height: 100px;
+	}
 }
 
 #rings .ring-2 {
@@ -49,9 +64,9 @@ $ring-2-color: #00b8b6;
 	position: absolute;
 	top: calc(50% - 150px);
 	left: calc(50% - 150px);	
-	border: 2px dashed $ring-2-color;
+	border: 2px dashed $ring-1-color;
 	border-radius: 100%;
-	@include infinite-animation(0, 150s, linear, inverse-rotate);
+	@include infinite-animation(0, 240s, linear, rotate);
 }
 
 #rings .ring-3 {
@@ -60,7 +75,28 @@ $ring-2-color: #00b8b6;
 	position: absolute;
 	top: calc(50% - 200px);
 	left: calc(50% - 200px);	
-	border: 2px solid $ring-2-color;
+	border: 3px solid $ring-1-color;
+	border-radius: 100%;
+}
+
+#rings .ring-3-2 {
+	width: 390px;
+	height: 390px;
+	position: absolute;
+	top: calc(50% - 195px);
+	left: calc(50% - 195px);	
+	background: image-url("partial-ring.png");
+	background-size: 390px 390px;
+	@include infinite-animation(0, 30s, linear, inverse-rotate);
+}
+
+#rings .ring-3-3 {
+	width: 380px;
+	height: 380px;
+	position: absolute;
+	top: calc(50% - 190px);
+	left: calc(50% - 190px);	
+	border: 3px solid $ring-1-color;
 	border-radius: 100%;
 }
 
@@ -85,4 +121,121 @@ $ring-2-color: #00b8b6;
 	border: 0 solid $ring-1-color;
 	border-radius: 100%;
 	@include box-shadow(inset 0 0 25px $ring-1-color);
+}
+
+#rings .ring-5 {
+	width: 560px;
+	height: 560px;
+	position: absolute;
+	top: calc(50% - 280px);
+	left: calc(50% - 280px);	
+	border: 3px solid transparentize($ring-2-color, 0.9);
+	border-radius: 100%;
+}
+
+#left-menu {
+	position: absolute;
+	top: 25%;
+	left: 10%;
+	width: 200px;
+	z-index: 1;
+	div {
+		margin: 50px 0;
+	}
+	div:nth-child(1) {
+		margin-left: 20px;
+	}
+
+	div:nth-child(2) {
+		margin-left: 10px;
+	}
+
+	div:nth-child(3) {
+		margin-left: 40px;
+	}
+}
+
+.square-btn {
+	display: inline-block;
+	padding: 0 10px;
+	text-align: center;
+	border: 1px solid $brand-primary;
+	@include box-shadow(0 0 10px $brand-primary);
+	cursor: pointer;
+	&:hover {
+		background-color: transparentize($brand-primary, 0.2);
+		// outline: 1px solid $brand-primary;
+		// border-bottom: 1px solid transparent;
+		color: $text-highlight-color;
+	}
+}
+
+#right-info {
+	position: absolute;
+	top: 25%;
+	right: 0;
+	width: 250px;
+	z-index: 1;
+	font-size: 0.8em;
+	color: $text-color-2;
+}
+
+#right-info .row:nth-child(1) {
+	margin-left: 0em;
+}
+
+#right-info .row:nth-child(2) {
+	margin-left: 0.5em;
+}
+
+#right-info .row:nth-child(3) {
+	margin-left: 1em;
+}
+
+#right-info .row:nth-child(4) {
+	margin-left: 1.5em;
+}
+
+#right-info .row:nth-child(5) {
+	margin-left: 2em;
+}
+
+#right-info .row:nth-child(6) {
+	margin-top: 2em;
+	margin-left: 2.5em;
+}
+
+#right-info .row:nth-child(7) {
+	margin-left: 3em;
+}
+
+#right-info .row:nth-child(8) {
+	margin-left: 3.5em;
+}
+
+#logo {
+	margin-top: 5em;
+	margin-left: 1em;
+	font-size: 2em;
+	color: $text-color-3;
+}
+
+@include keyframe(flipflap) {
+	0% {
+		@include rotateY(0deg);
+	}
+
+	100% {
+		@include rotateY(360deg);
+	}	
+}
+
+#right-info .link {
+	width: 100px;
+	cursor: pointer;
+}
+
+#right-info .link:hover .link-symbol {
+	color: $text-color;
+	@include infinite-animation(0, 1.5s, linear, flipflap);
 }
