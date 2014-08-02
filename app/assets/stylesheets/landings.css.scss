@@ -32,7 +32,9 @@ $ring-2-color: #fff;
 	position: relative;
 	width: 980px;
 	height: 600px;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: calc(50% - 600px);
 	opacity: 0;
 	@include transition-property(opacity);
 	@include transition-delay(500ms);
@@ -97,7 +99,7 @@ $ring-2-color: #fff;
 
 .displayer {
 	position: absolute;
-	font-size: 0.8em;
+	font-size: 0.75em;
 	width: 60px;
 	height: 60px;
 	margin-top: 5px;
@@ -214,7 +216,7 @@ $ring-2-color: #fff;
 	width: 200px;
 	z-index: 1;
 	div {
-		margin: 50px 0;
+		margin: 80px 0;
 	}
 	div:nth-child(1) {
 		margin-left: 20px;
@@ -230,7 +232,8 @@ $ring-2-color: #fff;
 }
 
 .square-btn {
-	display: inline-block;
+	display: block;
+	width: 100px;
 	padding: 0 10px;
 	text-align: center;
 	border: 1px solid $brand-primary;
@@ -323,11 +326,11 @@ $ring-2-color: #fff;
 	background: transparentize(darken($text-color-4, 20%), 0.6);
 
 	&:hover .time {
-		@include translateY(-1.4em);
+		@include translateY(-1.35em);
 	}
 
 	&:hover .zone {
-		@include translateY(-1.4em);
+		@include translateY(-1.35em);
 	}
 }
 

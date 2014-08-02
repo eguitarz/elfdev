@@ -65,8 +65,8 @@ $(document).on 'page:change', ->
 		.on 'mouseout', ->
 			hideDisplayer(1)
 
-		$('#idea').on 'mouseover', ->
-			setDisplayer(1, 3, 'pins')
+		$('#recipe').on 'mouseover', ->
+			setDisplayer(1, 3, 'recipes')
 		.on 'mouseout', ->
 			hideDisplayer(1)
 
