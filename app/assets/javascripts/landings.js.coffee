@@ -1,4 +1,5 @@
 $(document).on 'page:change', ->
+	self = @
 
 	setDisplayer = (index, number, unit)->
 		elem = $('.displayer').get(index-1)
@@ -20,10 +21,13 @@ $(document).on 'page:change', ->
 		m = prepandZeroes(now.getMinutes(), 2);
 		s = prepandZeroes(now.getSeconds(), 2);
 		ms = prepandZeroes(Math.round(now.getMilliseconds() / 100 + 0.5), 1);
-		$('#clock').text "#{h.slice(-2)}:#{m.slice(-2)}:#{s.slice(-2)}.#{ms.slice(-1)}"
-		setTimeout ->
+		$('#clock .time').text "#{h.slice(-2)}:#{m.slice(-2)}:#{s.slice(-2)}.#{ms.slice(-1)}"
+		self.clockCallback = setTimeout ->
 			updateClock()
 		,100
+
+	stopClock = ()->
+		clearTimeout self.clockCallback
 
 	updateDate = ()->
 		getMonthStr = (m)->
@@ -72,5 +76,18 @@ $(document).on 'page:change', ->
 			$(@).find('.date').html("DAY <span class=\"day\">#{dayOfYear}</span>")
 		.on 'mouseout', ->
 			$(@).find('.date').html(tmp)
+
+		# show menu
+		$('#menu-container').addClass 'show'
+
+		$('#clock').on 'mouseover', ->
+			stopClock()
+		.on 'mouseout', ->
+			updateClock()
+
+		# set time zone
+		diff = (new Date).getTimezoneOffset() / 60
+		diff = if diff >= 0 then 'UTC -' + diff else 'UTC ' + -diff
+		$('#clock .zone').text diff
 
 	initialize();

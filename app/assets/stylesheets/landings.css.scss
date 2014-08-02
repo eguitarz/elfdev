@@ -33,6 +33,14 @@ $ring-2-color: #fff;
 	width: 980px;
 	height: 600px;
 	margin: auto;
+	opacity: 0;
+	@include transition-property(opacity);
+	@include transition-delay(500ms);
+	@include transition-duration(2000ms);
+
+	&.show {
+		opacity: 1;
+	}
 }
 
 #rings {
@@ -58,7 +66,7 @@ $ring-2-color: #fff;
 	.date {
 		pointer-events: none;
 		font-size: 1.5em;
-		color: orange;
+		color: $text-color-4;
 		text-align: center;
 		line-height: 25px;
 		margin-top: 20px;
@@ -281,30 +289,58 @@ $ring-2-color: #fff;
 @include keyframe(flash) {
 	0% {opacity:0.45}
 	30% {opacity:0.9}
-	100% {opacity:0.21}
+	100% {opacity:0.36}
 }
 
 #logo {
-	margin-top: 5em;
-	margin-left: 1em;
+	position: absolute;
+	top: 40px;
+	left: 80px;
 	font-size: 2em;
 	color: $text-color-3;
 	span {
 		opacity: 0.45;
 	}
-	$animation-duration: 4.5s;
+	$animation-duration: 6.5s;
 	.e { @include infinite-animation(0, $animation-duration, ease, flash); }
-	.l { @include infinite-animation(100ms, $animation-duration, ease, flash); }
-	.f { @include infinite-animation(200ms, $animation-duration, ease, flash); }
-	.d { @include infinite-animation(300ms, $animation-duration, ease, flash); }
-	.e2 { @include infinite-animation(400ms, $animation-duration, ease, flash); }
-	.v { @include infinite-animation(500ms, $animation-duration, ease, flash); }
+	.l { @include infinite-animation(200ms, $animation-duration, ease, flash); }
+	.f { @include infinite-animation(400ms, $animation-duration, ease, flash); }
+	.d { @include infinite-animation(600ms, $animation-duration, ease, flash); }
+	.e2 { @include infinite-animation(800ms, $animation-duration, ease, flash); }
+	.v { @include infinite-animation(1000ms, $animation-duration, ease, flash); }
 }
 
 #clock {
+	width: 120px;
+	height: 1.5em;
+	overflow: hidden;
+	text-align: center;
+	color: $text-color-4;
 	margin-top: 1em;
-	margin-left: 0em;
+	margin-left: 2.5em;
 	font-size: 1.5em;
+	border: 1px solid $text-color-4;
+	background: transparentize(darken($text-color-4, 20%), 0.6);
+
+	&:hover .time {
+		@include translateY(-1.4em);
+	}
+
+	&:hover .zone {
+		@include translateY(-1.4em);
+	}
+}
+
+#clock .time {
+	@include transition-property(transform);
+	@include transition-duration(500ms);
+	pointer-events: none
+}
+
+#clock .zone {
+	@include transition-property(transform);
+	@include transition-duration(500ms);
+	pointer-events: none
 }
 
 @include keyframe(flipflap) {
