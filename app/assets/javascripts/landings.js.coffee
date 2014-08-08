@@ -40,7 +40,7 @@ $(document).on 'page:change', ->
 		monthStr = getMonthStr(now.getMonth()).toUpperCase()
 		dateStr = now.getDate()
 		dayStr = getDayStr(now.getDay()).toUpperCase()
-		$('.date').html "#{monthStr} #{dateStr} <span class=\"day\">#{dayStr}</span>"
+		$('.ring-1 .date').html "#{monthStr} #{dateStr} <span class=\"day\">#{dayStr}</span>"
 
 	getDayOfYear = ()->
 		now = new Date()

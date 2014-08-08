@@ -17,10 +17,9 @@
 			.glow
 		.ring-5
 	#left-menu
-		#status.square-btn
-			Sports
+		= link_to '<div class="square-btn" id="status">Sports</div>'.html_safe, sports_path
 		#journal.square-btn
-			Thoughts
+			Journal
 		#recipe.square-btn
 			Foods
 	#right-info

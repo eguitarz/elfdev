@@ -1,0 +1,40 @@
+@import "bootstrap_configuration";
+@import "compass/css3";
+@import "modules";
+
+$col-2-color: darken(#334455, 10%);
+$col-3-color: #334455;
+
+#sidebar {
+	height: 100%
+}
+
+#sidebar #col-1 {
+	min-height: 100%;
+}
+
+#sidebar #col-2 {
+
+}
+
+#sidebar #col-3 {
+	min-height: 100%;
+	opacity: 1;
+	@include translateX(0);
+	@include transition-duration(300ms);
+	@include transition-delay(180ms);
+
+	&.loadable {
+		@include translateX(30%);
+		opacity: 0.3;
+	}
+
+	h3 {
+		padding-bottom: 5px;
+		border-bottom: 1px solid;
+	}
+
+	h4 {
+		margin: 25px 0;
+	}
+}

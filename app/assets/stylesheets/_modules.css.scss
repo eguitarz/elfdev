@@ -64,3 +64,11 @@
     animation-iteration-count: infinite;
     animation-timing-function: $timefn;
 }
+
+@mixin border-color($color) {
+    border-color: $color !important;
+}
+
+@mixin bg($color) {
+    background-color: $color !important;
+}
