@@ -1,0 +1,73 @@
+@import 'variables';
+@import 'compass/css3';
+
+#hidden-menu {
+	position: fixed;
+	width: 248px;
+	margin-top: 40px;
+	margin-left: 40px;
+	z-index: 10;
+	// background: transparentize(#000, 0.8);
+	@include transform-origin(left, center);
+	// @include rotate(2deg);
+	@include transition-property(transform opacity);
+	@include transition-delay(1000ms);
+	@include transition-duration(300ms);
+	// @include box-shadow(3px 0 15px 0 #000);
+
+	&.inactive {
+		pointer-events: none;
+		@include translateX(-450px);
+		@include rotateY(180deg);
+		opacity: 0;
+	}
+}
+
+#hidden-menu .header-bar {
+	padding: 3px 6px;
+	margin-bottom: 6px;
+	background: #000;
+	color: $white;
+
+	.brand {
+		display: inline;
+		background-image: image_url('elfdev-logo@32.png');
+		background-repeat: no-repeat;
+		background-size: 14px 14px;
+		background-position: 4px 0;
+		padding-left: 26px;
+	}
+
+	.version {
+		display: inline;
+		float: right;
+	}
+}
+
+#hidden-menu .app {
+	display: inline-block;
+	background-color: transparentize(#000, 0.45);
+	height: 120px;
+	padding: 0;
+	cursor: pointer;
+
+	&:hover {
+		outline: 1px solid $orange;
+	}
+
+	&.small {
+		width: 120px;
+		margin: 0 0 6px 0;
+	}
+
+	&.large {
+		width: 248px;
+		margin: 0 0 6px 0;
+	}
+
+	.title {
+		padding: 3px;
+		color: $orange;
+		background-color: transparentize($orange, 0.8);
+	}
+}
