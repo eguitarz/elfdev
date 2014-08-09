@@ -1,5 +1,5 @@
 class SportsController < ApplicationController
-	before_action :set_moves_client
+	before_action :set_moves_client, :set_runkeeper_client
 
 	Activity = Struct.new(:summary) do
 		def name
@@ -39,7 +39,14 @@ class SportsController < ApplicationController
 		month = now.strftime('%B')
 		ds = get_daily_summaries now.strftime('%Y-%m')
 		@summaries = [ process_daily_summaries(ds).merge(month: month) ]
-		p @summaries
+
+		r_activities = get_runkeeper_activities
+		p r_activities.map(&:type)
+		p r_activities
+		# most recent activity
+		@recent_walk = r_activities.select{|a| a.type.downcase == 'walking'}.first
+		@recent_run = r_activities.select{|a| a.type.downcase == 'running'}.first
+		@recent_cycle = r_activities.select{|a| a.type.downcase == 'cycling'}.first
 	end
 
 	private
@@ -96,16 +103,20 @@ class SportsController < ApplicationController
 		end
 	end
 
+	def set_runkeeper_client
+		auth = Authentication.where(provider: 'runkeeper').first
+		if auth.present?
+			@runkeeper_client = HealthGraph::User.new(auth.access_token)
+		else
+			redirect_to "#{Rails.application.config.action_controller.relative_url_root}/auth/moves"
+		end
+	end
+
 	def get_daily_summaries(query)
-		summaries = []
-		result = @moves_client.daily_summary(query)
-		p result
-		result
+		@moves_client.daily_summary(query)
+	end
 
-		# result.each do |s|
-		# 	summaries << DailySummary.new(s)
-		# end
-
-		# summaries
+	def get_runkeeper_activities
+		@runkeeper_client.fitness_activities.items
 	end
 end

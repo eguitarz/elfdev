@@ -16,27 +16,39 @@
 	#col-1.col-md-2
 		< ELFDEV
 	#col-2.col-md-2
-		.squared.walked
-			%h3
-				Walked
-			%strong 3,445
-			%small steps
-			.info
-				%time 1h ago for 39m
-		.squared.ran
-			%h3
-				Latest Run
-			%strong 12,225
-			%small meters
-			.info
-				%time 2d ago for 42m
-		.squared.cycled
-			%h3
-				Cycling
-			%strong 12,668
-			%small meters
-			.info
-				%time 3d ago for 122m
+		- if @recent_walk
+			.squared.walked
+				%h3
+					Walked
+				%strong 
+					= number_with_delimiter( (@recent_walk[:total_distance]*1.312335).round(0))
+				%small steps
+				.info
+					%time 
+						- timeago = "#{time_ago_in_words(@recent_walk[:start_time])} ago".gsub('about', '')
+						= "#{timeago} for #{(@recent_walk[:duration]/60).round(0)}m"
+		- if @recent_run
+			.squared.ran
+				%h3
+					Latest Run
+				%strong
+					= number_with_delimiter(@recent_walk[:total_distance].round(0))
+				%small meters
+				.info
+					%time
+						- timeago = "#{time_ago_in_words(@recent_run[:start_time])} ago".gsub('about', '')
+						= "#{timeago} for #{(@recent_run[:duration]/60).round(0)}m"
+		- if @recent_cycle
+			.squared.cycled
+				%h3
+					Cycling
+				%strong
+					= number_with_delimiter((@recent_cycle[:total_distance]/1000).round(1))
+				%small kilometers
+				.info
+					%time
+						- timeago = "#{time_ago_in_words(@recent_cycle[:start_time])} ago".gsub('about', '')
+						= "#{timeago} for #{(@recent_cycle[:duration]/60).round(0)}m"
 	- @summaries.each do |s|
 		#col-3.col-md-8.loadable
 			%h3 
