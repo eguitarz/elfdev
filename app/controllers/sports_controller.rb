@@ -40,9 +40,8 @@ class SportsController < ApplicationController
 		ds = get_daily_summaries now.strftime('%Y-%m')
 		@summaries = [ process_daily_summaries(ds).merge(month: month) ]
 
-		r_activities = get_runkeeper_activities
+		r_activities = get_runkeeper_activities().items
 		p r_activities.map(&:type)
-		p r_activities
 		# most recent activity
 		@recent_walk = r_activities.select{|a| a.type.downcase == 'walking'}.first
 		@recent_run = r_activities.select{|a| a.type.downcase == 'running'}.first
@@ -117,6 +116,6 @@ class SportsController < ApplicationController
 	end
 
 	def get_runkeeper_activities
-		@runkeeper_client.fitness_activities.items
+		@runkeeper_client.fitness_activities
 	end
 end

@@ -1,9 +1,26 @@
 @import 'bootstrap_configuration';
+@import 'variables';
 @import 'compass/css3';
 
 #sports {
 	height: 100%;
 	background: #333;
+}
+
+#indicator {
+	position: absolute;
+	font-size: 0.75em;
+	z-index: 2;
+	padding: 5px;
+	background-color: transparentize($brand-primary, 0.6);
+	border: 1px solid $brand-primary;
+	color: $white;
+	@include transition-duration(300ms);
+	@include transition-property(opacity);
+	&.inactive {
+		opacity: 0;
+		pointer-events: none;
+	}
 }
 
 .squared{
