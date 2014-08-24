@@ -4,10 +4,34 @@ html {
 
 body {
   font-family: "Futura", sans-serif;
+  font-size: 10px;
   background-color: $darkblue;
   color: $white;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 a:hover {
   text-decoration: none;
+  color: inherit;
+}
+
+@for $i from 1 through 10 {
+  .span#{$i} { width: $col-width * $i; }
+}
+
+footer {
+  color: $greyblue;
+  font-size: 1.8em;
+}
+
+footer > div {
+  display: inline-block;
+}
+
+footer a:hover {
+  color: lighten($greyblue, 20%);
 }

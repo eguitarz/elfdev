@@ -18,13 +18,12 @@ gem 'bundler'
 
 gem 'devise', github: 'plataformatec/devise'
 gem 'binding_of_caller'
-gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
-gem 'bootstrap-sass-extras'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'google-analytics-rails'
 gem 'validates_formatting_of'
 gem 'tzinfo-data'
+
 
 group :development, :test do
   gem 'rspec-rails'
@@ -52,3 +51,4 @@ gem 'omniauth-moves'
 gem 'omniauth-runkeeper'
 gem 'moves'
 gem 'health_graph'
+gem 'font-awesome-sass'

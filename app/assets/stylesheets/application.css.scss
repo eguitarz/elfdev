@@ -11,9 +11,8 @@
 * file per style scope.
 *
 *= require_self
+*= require font-awesome
 */
-@import "bootstrap_configuration";
-@import "bootstrap";
 @import "variables";
 @import "modules";
 @import "base";
