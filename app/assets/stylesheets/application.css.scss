@@ -10,105 +10,11 @@
 * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
 * file per style scope.
 *
-*= require_tree .
-*= stub active_admin
 *= require_self
 */
 @import "bootstrap_configuration";
-@import "modules";
 @import "bootstrap";
-
-//->Prelang (ui_framework:twitter_bootstrap)
-
-// Give everything in 'yield' margin to separate it.
-.yield {
-  margin: 30px;
-}
-
-// Constrain forms for models (scaffolded models) so they aren't full page width.
-.form-model {
-  max-width: 750px;
-}
-
-//->Prelang (user_login:devise)
-.form-user {
-  max-width: 450px;
-}
-
-html {
-	height: 100%;
-}
-
-body {
-	font-family: "Share Tech Mono", sans-serif;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-$red: #ff8989;
-$white: #efefef;
-$blue: #3671b8;
-$green: #00b8b6;
-$orange: #ffa500;
-
-.red {
-	color: #ff8989;
-}
-
-.red-border {
-	@include border-color($red);
-}
-
-.red-bg {
-	@include bg($red);
-}
-
-.white {
-	color: #efefef;	
-}
-
-.white-border {
-	@include border-color($white);
-}
-
-.white-bg {
-	@include bg($white);
-}
-
-.blue {
-	color: #3671b8;
-}
-
-.blue-border {
-	@include border-color($blue);
-}
-
-.blue-bg {
-	@include bg($blue);
-}
-
-.green {
-	color: #00b8b6;
-}
-
-.green-border {
-	@include border-color($green);
-}
-
-.green-bg {
-	@include bg($green);
-}
-
-.orange {
-	color: #ffa500;
-}
-
-.orange-border {
-	@include border-color($orange);
-}
-
-.orange-bg {
-	@include bg($orange);
-}
+@import "variables";
+@import "modules";
+@import "base";
+@import "landings";

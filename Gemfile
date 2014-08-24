@@ -16,7 +16,6 @@ gem 'spring',        group: :development
 
 gem 'bundler'
 
-gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'devise', github: 'plataformatec/devise'
 gem 'binding_of_caller'
 gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
@@ -44,7 +43,7 @@ group :test do
 end
 
 group :development do
-  gem 'better_errors'
+
 end
 
 gem 'haml-rails'

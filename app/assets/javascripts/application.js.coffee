@@ -4,6 +4,3 @@
 #= require bootstrap
 
 #= require_tree .
-
-$(document).on 'page:change', ->
-	console.log $('.loadable').removeClass('loadable')
