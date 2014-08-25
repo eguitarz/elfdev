@@ -1,6 +1,7 @@
-%sidebar
+%sidebar.selected-numbers
 	#brand E L F D E V
 	#menu
+		%span.selection
 		#numbers.item
 			.title Numbers
 			.subtitle Body & fitness status
@@ -15,3 +16,40 @@
 			= link_to 'About', '#'
 		.twitter 
 			= link_to '<i class="fa fa-twitter"></i>'.html_safe, '#'
+
+#container
+	#static-layer
+		#circle-bg
+			.block
+				.info
+					.date AUG, 2014
+					.btn.btn-yellow SEE ALL
+			.rings
+				.ring
+	#dynamic-layer
+		.summary
+			.row1
+				.status
+					.numbers-content
+						<span class="highlight">99,123</span> steps
+					.places-content
+					.words-content					
+				.status
+					.numbers-content
+						<span class="highlight">5</span> runs
+					.places-content
+						Local <span class="highlight">21:59</span>
+					.words-content
+				.status
+					.numbers-content
+						<span class="highlight">65</span> bpm
+					.places-content
+					.words-content
+			.row2
+				.status
+					.numbers-content
+						slept <span class="highlight">7.2</span> hours
+					.places-content
+						Now at <span class="highlight">Home</span>
+					.words-content
+						<span class="highlight">1</span> posts
