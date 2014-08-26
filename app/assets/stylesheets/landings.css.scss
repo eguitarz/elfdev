@@ -1,5 +1,6 @@
 $menu-top: 200px;
 $status-size: 190px;
+$loading-duration: 500ms;
 
 #landings {
 
@@ -33,46 +34,28 @@ $status-size: 190px;
     }
   }
 
-  sidebar.selected-numbers #menu {
+  .selected-numbers #menu {
     background-image: image_url('body.png');
   }
 
-  sidebar.selected-places #menu {
+  .selected-places #menu {
     background-image: image_url('place.png');
   }
 
-  sidebar.selected-words #menu {
+  .selected-words #menu {
     background-image: image_url('thought.png');
   }
 
-  sidebar.selected-numbers .selection {
+  .selected-numbers .selection {
     @include translateY(0px);
   }
 
-  sidebar.selected-places .selection {
+  .selected-places .selection {
     @include translateY(122px);
   }
 
-  sidebar.selected-words .selection {
+  .selected-words .selection {
     @include translateY(244px);
-  }
-
-  .numbers-content, .places-content, .words-content {
-    width: $status-size;
-    position: absolute;
-    opacity: 0;
-  }
-
-  sidebar.selected-numbers + #container .numbers-content {
-    opacity: 1 !important;
-  }
-
-  sidebar.selected-places + #container .places-content {
-    opacity: 1 !important;
-  }
-
-  sidebar.selected-words + #container .words-content {
-    opacity: 1 !important;
   }
 
   #menu .selection {
@@ -80,13 +63,9 @@ $status-size: 190px;
     width: 5px;
     height: 82px;
     margin-left: -20px;
-    margin-top: -10px;
     background-color: $lightblue;
     border-radius: 5px;
     @include box-shadow(0 0 3px 1px lighten($lightblue, 15%));
-    @include transition-property('transform');
-    @include transition-duration(250ms);
-    @include transition-timing-function(cubic-bezier(0.145, 1.075, 0.345, 1.12));
   }
 
   .menulist {
@@ -130,11 +109,6 @@ $status-size: 190px;
     border-radius: 100%;
     border-color: transparent;
     z-index: 2;
-    // preload
-    @include transition-property(all);
-    @include transition-duration(500ms);
-    opacity: 0;
-    @include scale(0.7);
   }
 
   #circle-bg .rings {
@@ -146,9 +120,7 @@ $status-size: 190px;
       height: $bg-circle-size + 40;
       border: 10px solid $white;
       border-radius: 100%;
-      border-top-color: darken($blue, 15%);
-      @include transition-duration(500ms);
-      @include transition-property(tranform);
+      border-top-color: lighten($blue, 15%);
     }
   }
 
@@ -174,19 +146,16 @@ $status-size: 190px;
   }
 
   #dynamic-layer {
-    position: relative;
+    position: absolute;
     height: 100%;
-    width: 920px;
-    margin-left: -380px;
+    right: 9%;
     .row1 {
       padding-top: 160px;
-      width: 100%;
       position: relative;
     }
     .row2 {
       padding-top: 80px;
       margin-left: 120px;
-      width: 100%;
       position: relative;
     }
   }
@@ -194,26 +163,32 @@ $status-size: 190px;
   #dynamic-layer .summary {
     width: 100%;
     min-height: 100%;
+
+
+  }
+
+  .preview {
+    position: relative;
+    position: relative;
+    display: inline-block;
+    z-index: 3;
   }
 
   .status {
-    position: relative;
-    opacity: 0;
-    display: inline-block;
     width: $status-size;
     height: $status-size;
-    margin-left: 80px; 
     border-radius: 100%;
     line-height: $status-size;
     text-align: center;
+    margin-left: 80px; 
     background-color: $blue;
     border: 15px solid $darkblue;
     font-size: 2.4em;
     color: $lightblue;
-    z-index: 3;
     @include rotate(90deg);
     @include transition-duration(300ms);
     @include transition-property(all);
+    opacity: 0;
 
     & .highlight {
       color: $white;
@@ -221,40 +196,70 @@ $status-size: 190px;
     }
   }
 
-  sidebar.selected-numbers + #container .status {
-    opacity: 1;
-    @include rotate(0deg);
+  .row1 .preview:first-child .status {
+      margin-left: 0;
   }
 
-  sidebar.selected-places + #container {
-    & .row1 .status:nth-child(2) {
+  .status .content {
+    opacity: 0;
+    @include transition-duration(300ms);
+    @include transition-property(all);
+  }
+
+  .selected-numbers {
+    & .status {
+      opacity: 1;
+      @include rotate(0deg);
+    }
+  }
+
+  .selected-places {
+    & .row1 .preview:nth-child(2) .status {
       opacity: 1;
       @include rotate(0deg);
     }
 
+    & .row2 .preview:nth-child(1) .status {
+      opacity: 1;
+      @include rotate(0deg);
+    }
+  }
+
+  .selected-words {
     & .row2 .status:nth-child(1) {
       opacity: 1;
       @include rotate(0deg);
     }
   }
 
-  sidebar.selected-words + #container {
-    & .row2 .status:nth-child(1) {
-      opacity: 1;
-      @include rotate(0deg);
-    }
-  }
-
-  sidebar.selected-numbers + #container .ring {
+  .selected-numbers .ring {
     @include rotate(0deg);
   }
 
-  sidebar.selected-places + #container .ring {
+  .selected-places .ring {
     @include rotate(120deg);
   }
 
-  sidebar.selected-words + #container .ring {
+  .selected-words .ring {
     @include rotate(240deg);
+  }
+
+  .numbers-content, .places-content, .words-content {
+    width: $status-size;
+    position: absolute;
+    opacity: 0;
+  }
+
+  .selected-numbers .numbers-content {
+    opacity: 1 !important;
+  }
+
+  .selected-places .places-content {
+    opacity: 1 !important;
+  }
+
+  .selected-words .words-content {
+    opacity: 1 !important;
   }
 
   footer {
@@ -266,10 +271,116 @@ $status-size: 190px;
     margin-right: 20px;
   }
 
-  // Enter animation
+  // animations
+  .ring {
+    @include transition-property(all);
+    @include transition-duration(300ms);
+  }
+
+  .preview {
+    opacity: 0;
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    @include scale(1.5);
+  }
+
+  &.loaded .preview {
+    opacity: 1;
+    @include scale(1);
+  }
+
+  #circle-bg {
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    opacity: 0;
+    @include scale(0.7);
+  }
+
   &.loaded #circle-bg {
     opacity: 1;
     @include scale(1);
   }
-  // Exit animation
+
+  #menu {
+    @include transition-property(all);
+    @include transition-duration($loading-duration/2);
+    opacity: 0;
+    @include translateY(-120px);
+  }
+
+  &.loaded #menu {
+    opacity: 1;
+    @include translateY(0);
+  }
+
+  #menu .selection {
+    @include transition-property('all');
+    @include transition-duration(250ms);
+    @include transition-timing-function(cubic-bezier(0.145, 1.075, 0.345, 1.12));
+  }
+
+  .menulist .item:nth-child(1) {
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    @include transition-delay(200ms);
+    @include translate(-200px);
+    opacity: 0;
+  }
+
+  &.loaded .item:nth-child(1) {
+      @include translate(0);
+      opacity: 1;
+  }
+
+  .menulist .item:nth-child(2) {
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    @include transition-delay(400ms);
+    @include translate(-200px);
+    opacity: 0;
+  }
+
+  &.loaded .item:nth-child(2) {
+      @include translate(0);
+      opacity: 1;
+  }
+
+  .menulist .item:nth-child(3) {
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    @include transition-delay(600ms);
+    @include translate(-200px);
+    opacity: 0;
+  }
+
+  &.loaded .item:nth-child(3) {
+      @include translate(0);
+      opacity: 1;
+  }
+
+  #brand {
+    opacity: 0;
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    @include transition-delay(1000ms);
+    @include scale(1.5);
+  }
+
+  &.loaded #brand {
+    opacity: 1;
+    @include scale(1);
+  }
+
+  footer {
+    opacity: 0;
+    @include transition-property(all);
+    @include transition-duration($loading-duration);
+    @include transition-delay(1500ms);
+    @include scale(1.5);
+  }
+
+  &.loaded footer {
+    opacity: 1;
+    @include scale(1);
+  }
 }

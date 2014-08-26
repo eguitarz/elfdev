@@ -8,7 +8,7 @@ $(document).on 'page:change', ->
   $('body').addClass('loaded')
 
   # redispatch every hyper link
-  $('a').on 'click mouseup', (e)->
+  $('a').on 'click', (e)->
     e.preventDefault()
     e.stopPropagation()
     $('body').removeClass('loaded')

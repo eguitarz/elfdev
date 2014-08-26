@@ -2,15 +2,15 @@
 <html>
 <head>
   <title>ELFDEV</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 <meta name="viewport" content="width=device-width, initial-scale=1"/><!-- Prelang: Analytics / Google Analytics -->
     <%= analytics_init if Rails.env.production? %></head>
 <body id="<%= params[:controller] %>">
-
-
-<%= yield %>
-
+  <div id="application" class="selected-numbers">
+    <%= yield %>
+  </div>
 </body>
 </html>
