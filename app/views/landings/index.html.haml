@@ -17,15 +17,27 @@
 		.twitter 
 			= link_to '<i class="fa fa-twitter"></i>'.html_safe, '#'
 
-#container
-	#static-layer
-		#circle-bg
-			.block
-				.info
-					.date AUG, 2014
-					.btn.btn-yellow SEE ALL
-			.rings
-				.ring
+
+#static-layer
+	#circle-bg
+		.numbers-spinner.spinner
+			.info
+				.date AUG, 2014
+				.btn.btn-darkgrey SEE ALL
+		.places-spinner.spinner
+			.mask
+				#map
+			.info
+				.date AUG, 2024
+				.btn.btn-darkgrey SEE ALL
+		.words-spinner.spinner
+			.info
+				%h3 The Making of Elfdev
+				.intro
+					This is the story of designing & launching this site while traveling around the world, continued from part 1.
+				.btn.btn-darkgrey.center READ
+		.rings
+			.ring
 #dynamic-layer
 	.summary
 		.row1
@@ -39,8 +51,9 @@
 				.status
 					.numbers-content.content
 						<span class="highlight">5</span> runs
-					.places-content.content
-						Local <span class="highlight">21:59</span>
+					.places-content.content.photo
+						%img{src: image_url("nepal.jpg") }
+						%small <span class="highlight">5</span> days ago
 					.words-content.content
 			.preview
 				.status

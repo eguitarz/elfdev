@@ -21,6 +21,10 @@ a:hover {
   color: inherit;
 }
 
+.center {
+  margin: auto;
+}
+
 @for $i from 1 through 10 {
   .span#{$i} { width: $col-width * $i; }
 }

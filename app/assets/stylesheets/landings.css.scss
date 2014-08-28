@@ -51,17 +51,18 @@ $loading-duration: 500ms;
   }
 
   .selected-places .selection {
-    @include translateY(122px);
+    @include translateY(120px);
   }
 
   .selected-words .selection {
-    @include translateY(244px);
+    @include translateY(240px);
   }
 
   #menu .selection {
     position: absolute;
     width: 5px;
     height: 82px;
+    margin-top: 4px;
     margin-left: -20px;
     background-color: $lightblue;
     border-radius: 5px;
@@ -75,28 +76,46 @@ $loading-duration: 500ms;
   .menulist .title {
     color: $white;
     font-size: 3.2em;
+    -webkit-backface-visibility: hidden;
   }
 
   .menulist .subtitle {
     color: $iceblue;
     font-size: 1.8em;
     margin-top: -0.3em;
+    -webkit-backface-visibility: hidden;
   }
 
   .menulist > .item {
-    margin-bottom: 60px;  
+    height: 120px;
     cursor: pointer;
   }
 
-  #container {
+  #static-layer {
     position: absolute;
     width: 520px;
     min-height: 100%;
     right: 5%;
   }
 
-  #static-layer {
+  .spinner {
     position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .selected-numbers .numbers-spinner {
+    opacity: 1;
+  }
+
+  .selected-places .places-spinner {
+    opacity: 1;
+  }
+
+  .selected-words .words-spinner {
+    opacity: 1;
   }
 
   $bg-circle-size: 480px;
@@ -124,25 +143,67 @@ $loading-duration: 500ms;
     }
   }
 
-  .block {
-    position: relative;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-  }
-
-  .info {
+  .numbers-spinner .info {
     position: absolute;
     top: 50%;
     height: 100px;
     left: 80px;
     width: 100%;
     margin-top: -50px;
+
+    .date {
+      color: $black;
+      font-size: 6.4em;
+    }
   }
 
-  .date {
-    color: $black;
-    font-size: 6.4em;
+  .places-spinner .mask {  
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .places-spinner #map {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .places-spinner .info {
+    position: absolute;
+    top: 50%;
+    height: 100px;
+    left: 80px;
+    width: 100%;
+    margin-top: -50px;
+    z-index: 3;
+
+    .date {
+      color: $black;
+      font-size: 6.4em;
+    }
+  }
+
+  .words-spinner .info {
+    position: absolute;
+    top: 50%;
+    width: 360px;
+    height: 300px;
+    left: 60px;
+    margin-top: -150px; 
+
+    h3 {
+      font-size: 3.2em;
+      color: $black;
+    }
+
+    .intro {
+      font-size: 2.4em;
+      color: lighten($black, 15%);
+    }
   }
 
   #dynamic-layer {
@@ -175,6 +236,7 @@ $loading-duration: 500ms;
   }
 
   .status {
+    position: relative;
     width: $status-size;
     height: $status-size;
     border-radius: 100%;
@@ -189,10 +251,16 @@ $loading-duration: 500ms;
     @include transition-duration(300ms);
     @include transition-property(all);
     opacity: 0;
+    overflow: hidden;
+    z-index: 2;
 
     & .highlight {
       color: $white;
       font-size: 1.2em;
+    }
+
+    &:hover {
+      background-color: lighten($blue, 10%);
     }
   }
 
@@ -204,6 +272,41 @@ $loading-duration: 500ms;
     opacity: 0;
     @include transition-duration(300ms);
     @include transition-property(all);
+  }
+
+  .photo {
+    position: relative;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    img {
+      width: $status-size * 2;
+      margin-left: -$status-size / 2;
+      margin-top: -$status-size / 2;
+      @include transition-property(transform);
+      @include transition-duration(500ms);
+    }
+    small {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      line-height: 40px;
+      font-size: 1em;
+      background-color: transparentize($black, 0.5);
+      background-repeat: no-repeat;
+      z-index: 1;
+      @include transition-property(transform);
+      @include transition-duration(500ms);
+    }
+
+    &:hover img {
+      @include scale(0.67);
+    }
+    &:hover small {
+      @include translateY(100px);
+    }
   }
 
   .selected-numbers {
@@ -264,7 +367,8 @@ $loading-duration: 500ms;
 
   footer {
     position: absolute;
-    bottom: 40px;
+    bottom: 80px;
+    -webkit-backface-visibility: hidden;
   }
 
   footer > div {
@@ -282,6 +386,18 @@ $loading-duration: 500ms;
     @include transition-property(all);
     @include transition-duration($loading-duration);
     @include scale(1.5);
+  }
+
+  .preview:nth-child(1) {
+    @include transition-delay(150ms);
+  }
+
+  .preview:nth-child(2) {
+    @include transition-delay(300ms);
+  }
+
+  .preview:nth-child(3) {
+    @include transition-delay(450ms);
   }
 
   &.loaded .preview {
@@ -364,6 +480,7 @@ $loading-duration: 500ms;
     @include transition-duration($loading-duration);
     @include transition-delay(1000ms);
     @include scale(1.5);
+    -webkit-backface-visibility: hidden;
   }
 
   &.loaded #brand {
