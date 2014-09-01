@@ -18,55 +18,48 @@
 			= link_to '<i class="fa fa-twitter"></i>'.html_safe, '#'
 
 
-#static-layer
+.spinner-container
 	#circle-bg
 		.numbers-spinner.spinner
 			.info
-				.date AUG, 2014
+				.preview
+					.status <span class="highlight">320,000</span> steps
+				.preview
+					.status <span class="highlight">59</span> runs
+				.preview
+					.status <span class="highlight">65</span> bpm
+				.last-updated
+					Last updated 2 days ago
 				.btn.btn-darkgrey SEE ALL
 		.places-spinner.spinner
 			.mask
 				#map
 			.info
-				.date AUG, 2024
-				.btn.btn-darkgrey SEE ALL
+				.nowat
+					%span.highlight Home
+					%span Edmonton, Canada
+				.bottom
+					.last-updated Updated 2 days ago
+					.btn.btn-darkgrey MORE
+				.preview
+					.status
+						.photo
+							%img{src: image_url("nepal.jpg") }
+							.img-text
+								%small <span class="highlight">Pokhara, Nepal</span>
+								%small <span class="highlight">5</span> days ago
+
 		.words-spinner.spinner
 			.info
 				%h3 The Making of Elfdev
 				.intro
 					This is the story of designing & launching this site while traveling around the world, continued from part 1.
 				.btn.btn-darkgrey.center READ
+				.preview
+					.status <span class="highlight">5</span> posts
 		.rings
 			.ring
-#dynamic-layer
-	.summary
-		.row1
-			.preview
-				.status
-					.numbers-content.content
-						<span class="highlight">99,123</span> steps
-					.places-content.content
-					.words-content.content					
-			.preview
-				.status
-					.numbers-content.content
-						<span class="highlight">5</span> runs
-					.places-content.content.photo
-						%img{src: image_url("nepal.jpg") }
-						%small <span class="highlight">5</span> days ago
-					.words-content.content
-			.preview
-				.status
-					.numbers-content.content
-						<span class="highlight">65</span> bpm
-					.places-content.content
-					.words-content.content
-		.row2
-			.preview
-				.status
-					.numbers-content.content
-						slept <span class="highlight">7.2</span> hours
-					.places-content.content
-						Now at <span class="highlight">Home</span>
-					.words-content.content
-						<span class="highlight">1</span> posts
+		.indicators
+			#numbers-indicator.indicator <span>Numbers</span>
+			#places-indicator.indicator <span>Places</span>
+			#words-indicator.indicator <span>Words</span>

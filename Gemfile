@@ -47,6 +47,7 @@ end
 
 gem 'haml-rails'
 gem 'compass-rails'
+gem 'animation'
 gem 'omniauth-moves'
 gem 'omniauth-runkeeper'
 gem 'moves'

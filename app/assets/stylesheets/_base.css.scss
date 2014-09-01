@@ -25,10 +25,6 @@ a:hover {
   margin: auto;
 }
 
-@for $i from 1 through 10 {
-  .span#{$i} { width: $col-width * $i; }
-}
-
 footer {
   color: $greyblue;
   font-size: 1.8em;

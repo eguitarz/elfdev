@@ -1,6 +1,13 @@
 $menu-top: 200px;
-$status-size: 190px;
+$status-size: 160px;
 $loading-duration: 500ms;
+$indicator-color: lighten($darkblue, 10%);
+$indicator-color-selected: lighten($darkblue, 25%);
+
+@include keyframes(blink) {
+  0% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
 
 #landings {
 
@@ -87,15 +94,17 @@ $loading-duration: 500ms;
   }
 
   .menulist > .item {
-    height: 120px;
+    width: 120px;
+    margin-bottom: 60px;
     cursor: pointer;
   }
 
-  #static-layer {
+  .spinner-container {
     position: absolute;
     width: 520px;
     min-height: 100%;
-    right: 5%;
+    top: 0;
+    right: 15%;
   }
 
   .spinner {
@@ -104,30 +113,94 @@ $loading-duration: 500ms;
     width: 100%;
     height: 100%;
     opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    .info {
+      position: absolute;
+      top: 80px;
+      left: 45px;
+      // cursor: pointer;
+      width: 388px;
+      height: 326px;
+      margin: auto;
+      z-index: 3;
+      .btn {
+        position: absolute;
+        bottom: 0px;
+        left: 134px;
+        &:hover {
+          background-color: lighten($black, 30%);  
+        }
+      }
+    }
   }
 
   .selected-numbers .numbers-spinner {
     opacity: 1;
+    pointer-events: auto;
   }
 
   .selected-places .places-spinner {
     opacity: 1;
+    pointer-events: auto;
   }
 
   .selected-words .words-spinner {
     opacity: 1;
+    pointer-events: auto;
   }
 
   $bg-circle-size: 480px;
   #circle-bg {
-    position: relative;
+    position: absolute;
     width: $bg-circle-size;
     height: $bg-circle-size;
-    margin: ($menu-top + 50) auto 0 auto;
+    margin: ($menu-top - 20) auto 0 auto;
     background-color: $lightblue;
     border-radius: 100%;
     border-color: transparent;
     z-index: 2;
+
+    .last-updated {
+      font-size: 1.8em;
+      text-align: center;
+      margin-top: 20px;
+      color: $black;
+    }
+
+    .indicators {
+      .indicator {
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 80px;
+        background-color: $indicator-color;
+        text-align: center;
+        font-size: 1.2em;
+        @include transition-property(all);
+        @include transition-duration(500ms);
+        cursor: pointer;
+
+        &:hover {
+          @include scale(1.25);
+        }
+      } 
+      #numbers-indicator {
+        position: absolute;
+        left: 200px;
+        top: -130px;
+      }
+      #places-indicator {
+        position: absolute;
+        left: 480px;
+        top: 380px;
+      }
+      #words-indicator {
+        position: absolute;
+        left: -80px;
+        top: 380px;
+      }
+    }
   }
 
   #circle-bg .rings {
@@ -139,21 +212,27 @@ $loading-duration: 500ms;
       height: $bg-circle-size + 40;
       border: 10px solid $white;
       border-radius: 100%;
-      border-top-color: lighten($blue, 15%);
+      border-top-color: $indicator-color-selected;
     }
   }
 
   .numbers-spinner .info {
-    position: absolute;
-    top: 50%;
-    height: 100px;
-    left: 80px;
-    width: 100%;
-    margin-top: -50px;
-
     .date {
       color: $black;
       font-size: 6.4em;
+    }
+    .preview {
+      position: absolute;
+      top: 20%;
+      &:nth-child(1) {
+        left: -120px;
+      }
+      &:nth-child(2) {
+        left: 100px;
+      }
+      &:nth-child(3) {
+        left: 320px;
+      }
     }
   }
 
@@ -170,31 +249,57 @@ $loading-duration: 500ms;
     position: absolute;
     width: 100%;
     height: 100%;
+    background-image: image_url("worldmap.png");
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: 90%;
   }
 
   .places-spinner .info {
-    position: absolute;
-    top: 50%;
-    height: 100px;
-    left: 80px;
-    width: 100%;
-    margin-top: -50px;
-    z-index: 3;
+    .preview {
+      position: absolute;
+      right: -160px;
+      top: -120px;
+    }
 
-    .date {
+    .nowat {
+      position: absolute;
+      top: -20px;
+      font-size: 2.4em;
+      width: 100%;
+      text-align: center;
       color: $black;
-      font-size: 6.4em;
+      & > span {
+        display: block;
+      }
+      .grey {
+        color: lighten($black, 40%);
+      }
+      .highlight {
+        color: $white;
+      }
+    }
+
+    .bottom{
+      position: absolute;
+      width: 100%;
+      bottom: -40px;
+      .btn {
+        position: relative;
+      }
+    }
+    .last-updated {
+      text-align: center;
+      line-height: 1.4em;
     }
   }
 
   .words-spinner .info {
-    position: absolute;
-    top: 50%;
-    width: 360px;
-    height: 300px;
-    left: 60px;
-    margin-top: -150px; 
-
+    .preview {
+      position: absolute;
+      right: -160px;
+      top: -120px;
+    }
     h3 {
       font-size: 3.2em;
       color: $black;
@@ -206,46 +311,27 @@ $loading-duration: 500ms;
     }
   }
 
-  #dynamic-layer {
+  .summary {
     position: absolute;
     height: 100%;
-    right: 9%;
-    .row1 {
-      padding-top: 160px;
-      position: relative;
-    }
-    .row2 {
-      padding-top: 80px;
-      margin-left: 120px;
-      position: relative;
-    }
-  }
-
-  #dynamic-layer .summary {
-    width: 100%;
-    min-height: 100%;
-
-
+    right: 20%;
   }
 
   .preview {
-    position: relative;
     position: relative;
     display: inline-block;
     z-index: 3;
   }
 
   .status {
-    position: relative;
     width: $status-size;
     height: $status-size;
     border-radius: 100%;
     line-height: $status-size;
     text-align: center;
-    margin-left: 80px; 
     background-color: $blue;
     border: 15px solid $darkblue;
-    font-size: 2.4em;
+    font-size: 2.2em;
     color: $lightblue;
     @include rotate(90deg);
     @include transition-duration(300ms);
@@ -253,6 +339,7 @@ $loading-duration: 500ms;
     opacity: 0;
     overflow: hidden;
     z-index: 2;
+    cursor: pointer;
 
     & .highlight {
       color: $white;
@@ -264,9 +351,6 @@ $loading-duration: 500ms;
     }
   }
 
-  .row1 .preview:first-child .status {
-      margin-left: 0;
-  }
 
   .status .content {
     opacity: 0;
@@ -286,52 +370,78 @@ $loading-duration: 500ms;
       @include transition-property(transform);
       @include transition-duration(500ms);
     }
-    small {
+    .img-text {
       position: absolute;
       bottom: 0;
-      left: 0;
       width: 100%;
-      height: 60px;
-      line-height: 40px;
-      font-size: 1em;
+      height: 50px;
       background-color: transparentize($black, 0.5);
-      background-repeat: no-repeat;
-      z-index: 1;
       @include transition-property(transform);
       @include transition-duration(500ms);
+      small {
+        display: block;
+        width: 100%;
+        font-size: 0.6em;
+        line-height: 1.4em;
+      }
     }
 
     &:hover img {
       @include scale(0.67);
     }
-    &:hover small {
+    &:hover .img-text {
       @include translateY(100px);
     }
   }
 
   .selected-numbers {
-    & .status {
+    .numbers-spinner .status {
       opacity: 1;
       @include rotate(0deg);
+    }
+
+    #numbers-indicator {
+      @include scale(1.25);
+      background-color: $indicator-color-selected !important;
+
+      &:hover span {
+        @include animation(0, 1s, blink);
+        @include animation-iteration-count(infinite);
+      }
     }
   }
 
   .selected-places {
-    & .row1 .preview:nth-child(2) .status {
+    .places-spinner .status {
       opacity: 1;
       @include rotate(0deg);
     }
 
-    & .row2 .preview:nth-child(1) .status {
-      opacity: 1;
-      @include rotate(0deg);
+    #places-indicator {
+      @include scale(1.25);
+      background-color: $indicator-color-selected !important;
+
+      &:hover span {
+        @include animation(0, 1s, blink);
+        @include animation-iteration-count(infinite);
+      }
     }
   }
 
   .selected-words {
-    & .row2 .status:nth-child(1) {
+    .words-spinner .status {
       opacity: 1;
       @include rotate(0deg);
+    }
+
+    #words-indicator {
+      @include scale(1.25);
+      background-color: $indicator-color-selected !important;
+
+      &:hover span {
+        @include animation(0, 1s, blink);
+        @include animation-iteration-count(infinite);
+      }
     }
   }
 
@@ -345,24 +455,6 @@ $loading-duration: 500ms;
 
   .selected-words .ring {
     @include rotate(240deg);
-  }
-
-  .numbers-content, .places-content, .words-content {
-    width: $status-size;
-    position: absolute;
-    opacity: 0;
-  }
-
-  .selected-numbers .numbers-content {
-    opacity: 1 !important;
-  }
-
-  .selected-places .places-content {
-    opacity: 1 !important;
-  }
-
-  .selected-words .words-content {
-    opacity: 1 !important;
   }
 
   footer {
